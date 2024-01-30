@@ -1,0 +1,28 @@
+.data-container {
+  padding: 4rem 2rem;
+}
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 2rem;
+  /* place-content: center; */
+}
+
+.data-file {
+  position: relative;
+  background: #999da9;
+  width: fit-content;
+  padding: 0 20px;
+}
+.data-file .title{
+    position: absolute;
+    top: 1.5rem;
+    left: 1rem;
+    transform: translate(50%, 50%);
+    color: #e6e7e9;
+    font-size: 0.7em;
+
+}
+.data-file .icon {
+  font-size: 5rem;
+}

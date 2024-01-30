@@ -1,0 +1,70 @@
+.header-container {
+  display: grid;
+  grid-template-columns: 100px auto 300px;
+  align-items: center;
+  height: 60px;
+  padding: 5px 20px;
+}
+
+.header-logo .span-1 {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.header-logo .span-2 {
+  color: #0f0137;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.header-menu {
+  display: flex;
+  justify-content: end;
+}
+.header-menu li {
+  margin-right: 10px;
+  letter-spacing: 1px;
+  color: #000;
+  font-size: 0.9rem;
+  cursor: pointer;
+  background: transparent;
+  padding: 2px 10px;
+  transition: all 0.3s linear;
+}
+
+.header-menu li:hover {
+  background: #0f0137;
+  color: white;
+}
+
+.header-form .text {
+  background: rgba(217, 217, 217, 0.34);
+  outline: 0;
+  border: 0;
+  margin-right: 1rem;
+  padding: 5px 10px;
+}
+
+.header-form .login {
+  cursor: pointer;
+  padding: 0.3rem 1.2rem;
+  border: 0;
+  background: #010b27;
+  color: white;
+  color: #fff;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+
+.header-form .login .link {
+  color: inherit;
+}
+
+
+/* @media screen and (min-width: 768px){
+    
+} */

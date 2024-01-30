@@ -1,0 +1,68 @@
+.login-container {
+  background-image: url("./hero-bg.png");
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+.login-panel {
+  padding: 2rem;
+  display: grid;
+  background: white;
+}
+
+.login-container .logo {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.login-container .span-1 {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.login-container .span-2 {
+  color: #0f0137;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.login-container .title {
+  text-align: center;
+  color: #01df24;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 1rem;
+}
+
+.login-form label {
+  font-size: 0.7em;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.login-form .input-group{
+    margin-bottom: .3rem;
+}
+.login-form input{
+    outline: 0;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+.login-btn{
+    display: block;
+    width: 100%;
+    margin-top: 1rem;
+    background: #010B27;
+    border: 1px solid #010B27;
+}
+
+.login-btn:hover{
+    background: white;
+    color: #010B27;
+}
