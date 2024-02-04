@@ -1,26 +1,28 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import Header from "./Components/Header";
-import Hero from "./Components/Hero";
-import Login from "./Components/Login";
-import Home from "./Components/Home";
-import Dashboard from "./Components/Dashboard";
-
+import { Card } from "./components/Card"
+import { Header } from "./components/Header"
+import Sidebar from "./components/Sidebar"
 
 function App() {
+
   return (
     <>
-      {/* <Header />
-      <Hero/> */}
-      {/* <Login/> */}
-
-      {/* <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
-      </Routes> */}
-      <Dashboard/>
+    <div className='bg-white text-black'> 
+      <Header />
+        {/* body  */}
+      <div className="flex px-14 mt-10 pb-4 gap-5">
+        <div className="w-[60%] flex flex-col gap-3">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+        </div>
+        <div className="w-[35%]">
+          <Sidebar />
+        </div>
+      </div>
+    </div>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
