@@ -1,6 +1,79 @@
+import React, { useEffect  } from "react";
+import {app} from "../../firebase";
 
+// const db = app.firestore();
 
 export const Header = () => {
+  const [fileUrl, setFileUrl] = React.useState(null);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [tags, setTags] = React.useState([]);
+  const [tagInput, setTagInput] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [desc, setDesc] = React.useState("");
+
+
+  const onFileChange = async (e) => {
+    const file = e.target.files[0];
+    const storageRef = app.storage().ref();
+    const fileRef = storageRef.child(file.name);
+    await fileRef.put(file);
+    setFileUrl(await fileRef.getDownloadURL());
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const username = e.target.username.value;
+    if (!username || !fileUrl) {  
+      return;
+    }
+    // await db.collection("users").doc(username).set({
+    //   name: username,
+    //   avatar: fileUrl,
+    // });
+  };
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      // const usersCollection = await db.collection("users").get();
+      // setUsers(
+      //   usersCollection.docs.map((doc) => {
+      //     return doc.data();
+      //   })
+      // );
+    };
+    fetchUsers();
+  }, []);
+
+  //write a useEffect to check if isOPen is true, if it is make the window unscrollable
+  // if it is false, make the window scrollable
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [isOpen]);
+
+
+  const handleTagInputChange = (e) => {
+    setTagInput(e.target.value);
+  };
+
+  const handleTagInputKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === ",") {
+      e.preventDefault();
+      if (tagInput.trim() !== "") {
+        setTags((prevTags) => [...prevTags, tagInput.trim()]);
+        setTagInput("");
+      }
+    }
+  };
+
+  const removeTag = (index) => {
+    setTags((prevTags) => prevTags.filter((_, i) => i !== index));
+  };
+
+
   return (
     <div className='bg-[#010b27] px-14 py-4 flex justify-between items-center'>
       <div>
@@ -20,10 +93,51 @@ export const Header = () => {
         </>
       </div>
 
-      <button className='bg-[#01DF24] text-white font-medium px-5 py-2 flex'>
-  
-        <h3>Upload</h3>
-      </button>
+      <button onClick={() => setIsOpen(!isOpen)} className='bg-[#01DF24] text-white font-medium px-5 py-2 flex'>Upload</button>      
+      {isOpen && <form onClick={() => setIsOpen(false)} className="absolute w-full flex justify-center items-center left-0 h-screen bottom-0 z-10 backdrop-filter backdrop-blur-md" onSubmit={onSubmit}>
+        <div onClick={(e) => e.stopPropagation()} className="bg-slate-100 p-4 flex flex-col justify-center gap-4 h-max w-[800px]">
+          <div className="flex w-full items-center gap-3">
+            <label htmlFor="name">name: </label>
+            <input onInput={(e) => setName(e.target.value)} className="bg-white outline-none flex-grow py-2 px-4" type="text" id='name' name="name" placeholder="name" />
+          </div>
+          <div className="flex w-full items-center gap-3">
+            <label htmlFor="description">desc: </label>
+          <input onInput={(e) => setDesc(e.target.value)} className="bg-white outline-none flex-grow py-2 px-4" type="text" id="description" name="description" placeholder="description" />
+          </div>
+
+          {/*  */}
+          <div className="flex w-full items-center gap-3">
+              <label htmlFor="tags">Tags:</label>
+              <input
+                className="bg-white outline-none flex-grow py-2 px-4"
+                type="text"
+                id="tags"
+                name="tags"
+                placeholder="Add tags separated by commas"
+                value={tagInput}
+                onChange={handleTagInputChange}
+                onKeyDown={handleTagInputKeyDown}
+              />
+            </div>
+            <div className="flex gap-2 flex-wrap">
+              {tags && tags.map((tag, index) => (
+                <div
+                onClick={() => removeTag(index)}
+                  key={index}
+                  className="bg-[#01df2272] text-white px-2 py-1 rounded"
+                >
+                  {tag}
+                </div>
+              ))}
+            </div>
+
+          {/*  */}
+          
+          <input id="file" type="file" className="hidden" onChange={onFileChange} />
+          <label htmlFor="file" className="cursor-pointer bg-blue-400 h-max bg-[#01df226d] w-max mx-auto text-white px-8 py-2">Choose file</label>
+          <button className="bg-[#01df22] w-max mx-auto text-white px-8 py-2 h-max">Submit</button>
+        </div>
+      </form>}
     </div>
   )
 }
