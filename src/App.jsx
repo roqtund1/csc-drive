@@ -37,13 +37,13 @@ function App() {
       <div className='bg-white text-black min-h-screen m-0'>
         <Header setSearch={setSearch} />
         {/* body  */}
-        <div className="flex px-14 mt-10 pb-4 gap-5">
-          <div className="w-[60%] flex flex-col gap-3">
+        <div className="flex px-14 mt-10 pb-4 gap-5 flex-wrap">
+          <div className="md:w-[60%] w-full flex flex-col gap-3">
             {data.map((val, index) => (
               <Card key={index} name={val.name} tags={val.tags} desc={val.desc} fileUrl={val.fileUrl} />
             ))}
           </div>
-          <div className="w-[35%]">
+          <div className="md:w-[35%] w-full">
             <Sidebar setFilter={setFilter} />
           </div>
         </div>
